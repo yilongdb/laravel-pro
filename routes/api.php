@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'auth'
+], function ($router) {
+
+    Route::post('google-login', 'AuthController@loginByGoogle');
+    Route::post('email-login', 'AuthController@loginByEmail');
+    Route::post('email-confirm', 'AuthController@emailConfirm');
+    Route::get('refresh', 'AuthController@refresh');
+
 });

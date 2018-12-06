@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/verification/{id}/{confirmation_code}', 'AuthController@emailConfirm');
