@@ -26,6 +26,8 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+//        Route::model('file' , App\Models\File::class);
     }
 
     /**

@@ -23,6 +23,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
     /**
      * The attributes that are mass assignable.
      *

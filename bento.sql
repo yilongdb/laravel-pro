@@ -52,6 +52,7 @@ CREATE TABLE `layers`(
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	type ENUM('box' , 'image' , 'icon' , 'slot' , 'text') NOT NULL DEFAULT 'box',
+		`status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '状态(0:已删除; 1:正常)',
 	parent_id MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
 	PRIMARY KEY(layer_id),
 	INDEX (parent_id),

@@ -13,7 +13,7 @@ use Google_Client;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class AuthController extends Controller
+class AuthController extends ApiController
 {
 
     private $user;
