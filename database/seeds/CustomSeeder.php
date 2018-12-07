@@ -59,12 +59,6 @@ class CustomSeeder extends Seeder
                     ]);
                 });
 
-//            $layers = $component->layers()->each(function ($layer){
-//                factory(\App\Models\Layer::class)->create([
-//                    'component_id' => $component->id
-//                ])->makeChildOf($layer);
-//            });
-
 
         });
     }

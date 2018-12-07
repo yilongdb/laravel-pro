@@ -18,6 +18,7 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('email-login', 'AuthController@loginByEmail');
     Route::post('email-confirm', 'AuthController@emailConfirm');
     Route::get('refresh', 'AuthController@refresh');
+    Route::post('logout', 'AuthController@logout');
 });
 
 Route::group(['middleware' => ['jwt.verify']], function ($router) {

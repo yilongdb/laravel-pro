@@ -10,7 +10,7 @@ class EmailConfirmPost extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:users,user_id',
+            'id' => 'required|exists:users',
             'confirmation_code' => 'required|exists:users'
         ];
     }

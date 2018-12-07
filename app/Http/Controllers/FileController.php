@@ -54,12 +54,12 @@ class FileController extends ApiController
     {
         $file = $file->with(
             ['user' => function ($q) {
-                $q->select('user_id');
+                $q->select('id');
             }
             ]
         )
-            ->with('component.layers')
-            ->with('token')->get();
+            ->with('components.layers')
+            ->with('tokens')->get();
 
         return $this->respond($file);
     }
@@ -75,6 +75,7 @@ class FileController extends ApiController
     public function update(FileRequest $request, File $file)
     {
         $file->update($request->all());
+        $file = $this->file->find($file->id);
         return $this->respond($file);
     }
 

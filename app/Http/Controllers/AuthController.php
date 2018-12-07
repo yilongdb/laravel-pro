@@ -29,22 +29,6 @@ class AuthController extends ApiController
         $this->user = $user;
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
-
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
-    }
-
     public function loginByGoogle(GoogleLoginPost $request)
     {
         $CLIENT_ID = config('google_client_id');

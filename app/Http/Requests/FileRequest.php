@@ -13,7 +13,7 @@ class FileRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,13 @@ class FileRequest extends FormRequest
     public function rules()
     {
         //update or create
-        $id = $this->file ? $this->file->getKey() : '';
+//        $id = $this->file ? $this->file->getKey() : '';
         $rules = [
-            'name' => 'required|max:80'
+            'name' => 'required|max:255'
         ];
-        if($id){
-            $rules['file_id'] = 'required|exists';
-        }
+//        if($id){
+//            $rules['id'] = 'required|exists';
+//        }
         return $rules;
     }
 }

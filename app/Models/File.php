@@ -8,7 +8,7 @@ class File extends Model
 {
 //    protected $primaryKey = 'file_id';
 
-    protected $hidden = ['user_id'];
+    protected $hidden = ['user_id' , 'created_at' , 'updated_at'];
 
     protected $fillable = ['name' , 'user_id'];
 
