@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Token extends Model
 {
-    protected $primaryKey = 'token_id';
+//    protected $primaryKey = 'token_id';
 
     protected $fillable = ['name' , 'file_id' , 'value' , 'status' , 'type'];
 

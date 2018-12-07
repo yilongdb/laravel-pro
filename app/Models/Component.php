@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Component extends Model
 {
-    protected $primaryKey = 'component_id';
+//    protected $primaryKey = 'component_id';
 
     protected $fillable = ['name' , 'file_id'];
 
