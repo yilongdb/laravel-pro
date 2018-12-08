@@ -39,7 +39,7 @@ class TokenController extends ApiController
     {
         $token = $file->tokens()->create($request->all());
 
-        return $this->respond($token);
+        return $this->respondCreated($token);
     }
 
     /**
@@ -64,7 +64,9 @@ class TokenController extends ApiController
     {
         $token->update($request->all());
 
-        return $this->respondSuccess();
+        $token = $this->token->find($token->id);
+
+        return $this->respond($token);
     }
 
     /**

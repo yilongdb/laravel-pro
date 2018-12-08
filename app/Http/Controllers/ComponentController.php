@@ -48,10 +48,10 @@ class ComponentController extends ApiController
      * @param  \App\Models\Component $component
      * @return \Illuminate\Http\Response
      */
-    public function show(Component $component)
+    public function show( File $file , Component $component)
     {
         //todo need convert to layer tree or frontend convert
-        $component = $component->with('layer')->get();
+        $component = $component->with('layers')->get();
 
         return $this->respond($component);
     }
@@ -66,8 +66,9 @@ class ComponentController extends ApiController
     public function update(Request $request, File $file, Component $component)
     {
         $component->update($request->all());
+        $component = $this->component->find($component->id);
 
-        return $this->respondSuccess();
+        return $this->respond($component);
     }
 
     /**

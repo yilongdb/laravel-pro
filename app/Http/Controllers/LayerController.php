@@ -40,7 +40,7 @@ class LayerController extends ApiController
     {
         $layer = $component->layers()->create($request->all());
 
-        return $this->respond($layer);
+        return $this->respondCreated($layer);
     }
 
     /**
@@ -65,7 +65,9 @@ class LayerController extends ApiController
     {
         $layer->update($request->all());
 
-        return $this->respondSuccess();
+        $layer = $this->layer->find($layer->id);
+
+        return $this->respond($layer);
     }
 
     /**

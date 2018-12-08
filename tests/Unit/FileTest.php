@@ -58,6 +58,8 @@ class FileTest extends TestCase
     /** @test */
     public function it_returns_the_created_file_by_the_file_id()
     {
+//        File::truncate();
+//        $this->loggedInUser->files()->delete();
         $data = $this->loggedInUser->files()->save(factory(File::class)->make());
 
         $response = $this->json('get', "/api/files/{$data->id}", []);
@@ -76,6 +78,8 @@ class FileTest extends TestCase
     /** @test */
     public function it_returns_the_created_file_and_include_component_token_layer_by_the_file_id()
     {
+//        File::truncate();
+//        $this->loggedInUser->files()->delete();
         $file = $this->loggedInUser->files()->save(factory(File::class)->make());
 
         $tokens = $file->tokens()->saveMany(
@@ -91,14 +95,12 @@ class FileTest extends TestCase
         );
 
         $layers = [];
-        Layer::all()->each(function ($layer){
-           $layer->delete();
-        });
-        $components->each(function ($component) use ($layers){
+//        Layer::truncate();
+        $components->each(function ($component) use (&$layers){
             $component->layers()->save(
                 factory(\App\Models\Layer::class)->make()
             )
-                ->each(function ($layer) use ($component , $layers) {
+                ->each(function ($layer) use ($component , &$layers) {
 
                     $subLayer = factory(\App\Models\Layer::class)->create([
                         'component_id' => $component->id,
@@ -106,12 +108,11 @@ class FileTest extends TestCase
                     ]);
                     $layers[] = $layer;
                     $layers[] = $subLayer;
-//                    var_dump($layers);
+//
                 });
         });
 
         $layers = Layer::all();
-
         $response = $this->json('get', "/api/files/{$file->id}", []);
 
 
