@@ -7,6 +7,7 @@ $factory->define(App\Models\Layer::class, function (Faker $faker) {
         'name' => $faker->name,
         'status' => false ,
         'type' => $faker->randomElement(['box' , 'image' , 'icon' , 'slot' , 'text']),
+        'parent_id' => null
     ];
 
 });

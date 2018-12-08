@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FileTest extends TestCase
 {
+//    use RefreshDatabase;
 
     public function setUp()
     {
@@ -61,7 +62,6 @@ class FileTest extends TestCase
 //        File::truncate();
 //        $this->loggedInUser->files()->delete();
         $data = $this->loggedInUser->files()->save(factory(File::class)->make());
-
         $response = $this->json('get', "/api/files/{$data->id}", []);
 
         $response->assertStatus(Response::HTTP_OK)
