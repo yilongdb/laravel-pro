@@ -1,0 +1,35 @@
+version: '3'
+
+servers:
+  # The Application php fpm
+  app:
+    build: .
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=database"
+  # The Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    ports:
+      - 8081:8081
+  database:
+    image: mysql:5.7
+      volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD: secret"
+      - "MYSQL_DATABASE: bento_laravelpro_migration_database"
+      - "MYSQL_USER: homestead"
+      - "MYSQL_PASSWORD: secret"
+    ports:
+      - "33061:3306"
+volumes:
+  dbdata:
