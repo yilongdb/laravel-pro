@@ -1,35 +1,41 @@
 version: '3'
 
-servers:
-  # The Application php fpm
+services:
   app:
     build: .
     working_dir: /var/www
     volumes:
       - .:/var/www
-    environment:
-      - "DB_PORT=3306"
-      - "DB_HOST=database"
-  # The Web Server
+    networks:
+      - backend
   web:
     build:
       context: ./
       dockerfile: web.dockerfile
     working_dir: /var/www
-    volumes_from:
-      - app
+    volumes:
+    - .:/var/www
+    networks:
+      - backend
     ports:
       - 8081:8081
   database:
+    env_file:
+      - database-docker.env
     image: mysql:5.7
-      volumes:
+    networks:
+      - backend
+    volumes:
       - dbdata:/var/lib/mysql
     environment:
-      - "MYSQL_ROOT_PASSWORD: secret"
-      - "MYSQL_DATABASE: bento_laravelpro_migration_database"
-      - "MYSQL_USER: homestead"
-      - "MYSQL_PASSWORD: secret"
+      - "MYSQL_ROOT_PASSWORD: {MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE: {MYSQL_DATABASE}"
+      - "MYSQL_USER: {MYSQL_USER}"
+      - "MYSQL_PASSWORD: {MYSQL_PASSWORD}"
     ports:
-      - "33061:3306"
+      - "{MYSQL_PORT}:3306"
+networks:
+  backend:
+    driver: bridge
 volumes:
   dbdata:

@@ -51,15 +51,17 @@ class CustomSeeder extends Seeder
         $components->each(function ($component) use ($faker) {
             $component->layers()->save(
                 factory(\App\Models\Layer::class)->make()
-            )
-                ->each(function ($layer) use ($component){
-                    $subLayer = factory(\App\Models\Layer::class)->create([
-                        'component_id' => $component->id,
-                        'parent_id' => $layer->id
-                    ]);
-                });
+            );
 
+        });
 
+        $layers = \App\Models\Layer::all();
+
+        $layers->each(function ($layer) use($faker){
+            factory(\App\Models\Layer::class)->create([
+                'parent_id' => $layer->id,
+                'component_id' => $layer->component->id
+            ]);
         });
     }
 }
